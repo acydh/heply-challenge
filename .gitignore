@@ -1,5 +1,4 @@
 # Custom 
-filestore/*
 *.sqlite
 instructions.txt
 package-lock.json

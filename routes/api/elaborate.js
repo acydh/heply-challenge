@@ -15,7 +15,7 @@ module.exports = async (fastify, opts) => {
       const options = { limits: { fileSize: 50 * 1024 * 1024 } };  // 50 MB file limit
       const parts = await req.files(options);
       for await (const part of parts) {
-        const filePath = `./filestore/${part.filename}.${Date.now()}`; // Create an unique filename to prevent duplicates
+        const filePath = `tmp/${part.filename}.${Date.now()}`; // Create an unique filename to prevent duplicates
         await pump(part.file, fs.createWriteStream(filePath));
         fastify.status.timeLastUpload = Date.now();
         const fileSize = fs.statSync(filePath).size;
@@ -28,11 +28,11 @@ module.exports = async (fastify, opts) => {
           }
           response.rejected.push(rejectedFileDetails);
         } else {
-          // Following requirements, check if all workers are busy. If so, add the MINIMUM wait time in seconds for the next worker to be available to the response 
           const uploadedFileDetails = {
             filename: part.filename,
             fileSize
           }
+          // Following requirements, check if all workers are busy. If so, add the MINIMUM wait time in seconds for the next worker to be available to the response 
           const minWaitTime = getMinWaitTime();
           if (minWaitTime > 0) {
             uploadedFileDetails.minWaitTime = minWaitTime
@@ -44,7 +44,7 @@ module.exports = async (fastify, opts) => {
       }
     } catch (error) {
       // Prevent too verbose errors to be sent to the client. Ideally the max file size will be limited by the frontend.
-      console.error(error.code);
+      console.error(error);
     }
     reply.send(response);
   })
@@ -63,5 +63,5 @@ module.exports = async (fastify, opts) => {
       return(0)
     }
   }
-  
+
 }
