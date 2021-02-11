@@ -1,0 +1,24 @@
+{
+  "name": "heply-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.0.0",
+    "fastify-autoload": "^3.3.1",
+    "fastify-multipart": "^4.0.0",
+    "fastify-piscina": "^3.0.0",
+    "fastify-plugin": "^3.0.0",
+    "point-of-view": "^4.13.0",
+    "pug": "^3.0.0",
+    "sequelize": "^6.5.0",
+    "sequelize-fastify": "^1.0.5",
+    "sqlite3": "^5.0.1"
+  }
+}

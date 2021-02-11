@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+    head
+        title DB View
+    body
+        header
+            h1#title Database View
+        if tasks.length > 0
+            section#table
+            table
+                tr 
+                    th id 
+                    th workerId 
+                    th filename 
+                    th timeLoad 
+                    th createdAt 
+                each task in tasks 
+                    tr 
+                        td= task.id
+                        td= task.workerId 
+                        td= task.fileName 
+                        td= task.timeLoad 
+                        td= task.createdAt
+            p 
+                a(href="/destroydb") Destroy
+        else 
+            h4 No entries
+        
