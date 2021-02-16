@@ -7,12 +7,13 @@ const pump = util.promisify(pipeline)
 
 module.exports = async (fastify, opts) => {
   fastify.post('/elaborate', async function (req, reply) {
+    const { MAX_FILE_SIZE } = fastify.constants;
     const response = {
       uploaded: [],
       rejected: [],
     };
     try {
-      const options = { limits: { fileSize: 50 * 1024 * 1024 } };  // 50 MB file limit
+      const options = { limits: { fileSize: MAX_FILE_SIZE } };  
       const parts = await req.files(options);
       for await (const part of parts) {
         const filePath = `tmp/${part.filename}.${Date.now()}`; // Create an unique filename to prevent duplicates
