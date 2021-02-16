@@ -7,6 +7,11 @@ const AutoLoad = require('fastify-autoload');
 
 fastify.register(require('fastify-multipart'));
 
+fastify.register(require('fastify-rate-limit'), {
+  max: 10,
+  timeWindow: '1 minute'
+})
+
 fastify.register(require('sequelize-fastify'), {
   instance: 'db',
   sequelizeOptions: {

@@ -15,6 +15,7 @@
     "fastify-multipart": "^4.0.0",
     "fastify-piscina": "^3.0.0",
     "fastify-plugin": "^3.0.0",
+    "fastify-rate-limit": "^5.0.1",
     "point-of-view": "^4.13.0",
     "pug": "^3.0.0",
     "sequelize": "^6.5.0",
